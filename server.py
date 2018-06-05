@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, request, session
+import datetime
 import random
 app = Flask(__name__)
 app.secret_key = 'abcdefghijklmnopqrstuvwxyz'
@@ -22,16 +23,16 @@ def index():
 def gold():
   if request.form['location'] == 'farm':
     session['gold'] += session['farm']
-    session['append'].insert(0, "Gained " + str(session['farm']) + " from the farm.")
+    session['append'].insert(0, "Gained " + str(session['farm']) + " from the farm. " + str(datetime.datetime.now()))
   if request.form['location'] == 'cave':
     session['gold'] += session['cave']
-    session['append'].insert(0, "Gained " + str(session['cave']) + " from the cave.")
+    session['append'].insert(0, "Gained " + str(session['cave']) + " from the cave. " + str(datetime.datetime.now()))
   if request.form['location'] == 'house':
     session['gold'] += session['house']
-    session['append'].insert(0, "Gained " + str(session['house']) + " from the house")
+    session['append'].insert(0, "Gained " + str(session['house']) + " from the house " + str(datetime.datetime.now()))
   if request.form['location'] == 'casino':
     session['gold'] += session['casino']
-    session['append'].insert(0, str(session['casino']) + " from the casino")
+    session['append'].insert(0, str(session['casino']) + " from the casino " + str(datetime.datetime.now()))
   return redirect('/')
 
 @app.route('/reset')
